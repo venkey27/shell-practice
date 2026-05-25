@@ -1,4 +1,6 @@
-movies = ("avatar""bahubali" "avengers" "spiderman")
+#1/bin/bash
+
+movies = ("avatar" "bahubali" "avengers" "spiderman")
 echo "all the movies are ${movies[@]}"
 echo "first movie names is ${movies[0]}"
 echo "second movie name is ${movies[2]}"
