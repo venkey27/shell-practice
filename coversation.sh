@@ -1,6 +1,6 @@
 #!/bin/bash
-PERSON1="VENKEY"
-PERSON2="SUDHEER"
+PERSON1="RANGA"
+PERSON2="SAM"
 echo "$PERSON1: lets drink beers"
 echo "$PERSON2: cheers!"
 echo "$PERSON1: how are you doing?"
