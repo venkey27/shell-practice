@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 
 movies = ("avatar" "bahubali" "avengers" "spiderman")
 echo "all the movies are ${movies[@]}"
