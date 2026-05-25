@@ -1,3 +1,6 @@
 #!/bin/bash
+# Simple greeting script
+# Usage: ./helloworld.sh [name]
 
-echo "Hello, world!"
+name=${1:-world}
+echo "Hello, $name!"
