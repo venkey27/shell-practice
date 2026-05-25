@@ -1,6 +1,7 @@
 #!/bin/bash
-PERSON1="RANGA"
-PERSON2="SAM"
+PERSON1=$1
+PERSON2=$2
+
 echo "$PERSON1: lets drink beers"
 echo "$PERSON2: cheers!"
 echo "$PERSON1: how are you doing?"
