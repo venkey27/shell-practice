@@ -3,6 +3,7 @@
 USERID=$(id -u)
 LOGS_DIR=/var/log/shell-script
 LOGS_FILE=$LOGS_DIR/$0.log
+TIMESTAMP=$(date "+%Y-%m-%d  %H:%M:%S")
 
 if [ $USERID -ne 0 ]; then
     echo " run the script with ROOT USER "
@@ -13,21 +14,21 @@ fi
 # 2nd arguement -> status of the installation exit code 
 VALIDATE(){
     if [ $2 -ne 0 ]; then
-        echo " installing$1 failed "
+        echo "$TIMESTAMP [eRror] installing$1 failed is a failed" | tee -a $LOGS_FILE
         exit 1
     else
-        echo " installing $1 is successfully "
+        echo "$TIMESTAMP [Info] installing $1 is successfully " | tee -a $LOGS_FILE
     fi
 }
 
 for package in $@
 do
     echo " installing $package "
-    dnf list installed $package 
+    dnf list installed $package &>> $LOGS_FILE
     if [ $? -ne 0 ]; then
     dnf install $package -y &>> $LOGS_FILE
     VALIDATE "installing $package" $?
     else
-        echo " $package is already installed "
+        echo "$TIMESTAMP [Info] $package is already installed ... Skipping" | tee -a $LOGS_FILE
     fi
 done 
