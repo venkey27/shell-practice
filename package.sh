@@ -26,5 +26,5 @@ do
     dnf list installed $package 
     if [ $? -ne 0 ]; then
     dnf install $package -y &>> $LOGS_FILE
-    VALIDATE $package $?
+    VALIDATE "installing $package" $?
 done 
