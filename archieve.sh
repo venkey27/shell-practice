@@ -20,3 +20,13 @@ if [ ! -d "$DEST_DIR" ]; then
     exit 1
 fi
 
+FILES=$(find "$SOURCE_DIR" -type f -name "*.log" -mtime +$DAYS)
+if [ -z "$FILES" ]; then
+    echo "no log files found in $SOURCE_DIR older than $DAYS days"
+    exit 0
+fi
+
+while IFS= read -r FILE # IFS is used to set the Internal Field Separator to newline character, so that it can handle file names with spaces
+do
+    echo "$FILE"
+done <<< "$FILES"
