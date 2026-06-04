@@ -29,4 +29,9 @@ fi
 while IFS= read -r FILE # IFS is used to set the Internal Field Separator to newline character, so that it can handle file names with spaces
 do
     echo "$FILE"
-done <<< "$FILES"
+done <<< "$FILES"   # <<< is used to read the output of the command into the while loop
+
+TIMESTAMP=$(date "+%Y-%m-%d-%H-%M-%S")
+ARCHIVE_FILE="$DEST_DIR/logs-archive-$TIMESTAMP.tar.gz"
+
+tar -czvf "$ARCHIVE_FILE" $FILES # -C is used to change the directory to source dir before creating the archive, so that it does not include the full path of the file in the archive
