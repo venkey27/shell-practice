@@ -26,12 +26,24 @@ if [ -z "$FILES" ]; then
     exit 0
 fi
 
-while IFS= read -r FILE # IFS is used to set the Internal Field Separator to newline character, so that it can handle file names with spaces
-do
-    echo "$FILE"
-done <<< "$FILES"   # <<< is used to read the output of the command into the while loop
+# while IFS= read -r FILE # IFS is used to set the Internal Field Separator to newline character, so that it can handle file names with spaces
+# do
+#     echo "$FILE"
+# done <<< "$FILES"   # <<< is used to read the output of the command into the while loop
 
 TIMESTAMP=$(date "+%Y-%m-%d-%H-%M-%S")
 ARCHIVE_FILE="$DEST_DIR/logs-archive-$TIMESTAMP.tar.gz"
 
-tar -czvf "$ARCHIVE_FILE" $FILES # -C is used to change the directory to source dir before creating the archive, so that it does not include the full path of the file in the archive
+tar -czvf "$ARCHIVE_FILE" $FILES &>/dev/null # -C is used to change the directory to source dir before creating the archive, so that it does not include the full path of the file in the archive
+
+if [ $? -eq 0 ]; then
+    echo "Aerchive created success, delecting thefiles"
+    while IFS= read -r FILE
+    do
+        rm -f "$FILE"
+        echo " Delect file: $FILE"
+    done <<< "$FILES"
+else
+    echo "Failed to create archive"
+    exit 1
+fi
