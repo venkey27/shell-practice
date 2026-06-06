@@ -7,6 +7,7 @@ while IFS= read -r line # IFS is used to set the Internal Field Separator to new
 do
   USAGE=$(echo "$line" | awk '{print $6}' | cut -d'%' -f1)
   PARTITION=$(echo "$line" | awk '{print $7}')
+  
   if [ $USAGE -ge $USAGE_THRESHOLD ]; then
     MESSAGE+="High disk usage alert: $PARTITION is at ${USAGE}% usage <br>"
   fi
